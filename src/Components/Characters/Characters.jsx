@@ -1,11 +1,15 @@
-import React, {useState, useEffect, useReducer, useMemo, useRef, useCallback} from 'react';
+import React, {useState, useReducer, useMemo, useRef, useCallback} from 'react';
 
 import { Search } from '../Search/Search';
+
+import { useCharacters } from '../Hooks/useCharacters';
 
 //Para un reducer necesitamos estados compuestos
 const initialState = {
     favorites: [],
 };
+
+const API = 'https://rickandmortyapi.com/api/character'
   
 //2 parametros: estado y accion
 //Una forma de usar Reducer es con SWITCH
@@ -28,13 +32,14 @@ const favoriteReducer = (state, action) => {
 };
 
 const Characters = () => {
-    const [characters, setCharacters] = useState([]);
 
     const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
 
     const [search, setSearch] = useState('');
 
     const searchInput = useRef(null);
+
+    const characters = useCharacters(API);
 
     const handleClickOnAddFavorites = favorite =>{
         dispatch({
@@ -60,21 +65,18 @@ const Characters = () => {
         }),
         [characters,search]
     )
-
-    useEffect(() =>{
-        fetch('https://rickandmortyapi.com/api/character')
-            .then(response=> response.json())
-            .then(data => setCharacters(data.results))
-    }, []);
     
     return (
         <div className="Characters px-5 mx-auto">
 
             {/* show favorites */}
-            <div className= 'flex flex-row mb-4'>
+            <div className='flex flex-start mb-4'>
+                <h2 className='text-900 title-font font-medium'>Favorite Characters</h2>
+            </div>
+            <div className= 'flex flex-row flex-wrap mb-4'>
                 {favorites.favorites.map(favorite =>(
                     <li className='list-none' key={favorite.id}>
-                        <img alt="team" className="w-16 h-16 border-gray-400 border-4 rounded-full mr-4" src={favorite.image} />
+                        <img alt="team" className="w-16 h-16 border-gray-400 border-4 rounded-full mr-4 mt-4" src={favorite.image} />
                     </li>
                 ))}
             </div>

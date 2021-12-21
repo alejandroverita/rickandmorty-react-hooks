@@ -57,3 +57,14 @@ Uso de la referencia
   },
   [a, b],
   );
+
+### Custom Hooks
+
+Reglas de los hooks
+
+- No invocar hooks desde loops, condicionales o funciones anidadas.
+- Todo custom hook debe iniciar por la palabra use
+- 2 componentes compartiendo el mismo hook no comparten el mismo estado
+- Un hook puede invocar a otro hook
+- Los hook solo deben usarse en componentes funcionales
+- Deben utilizarse en el nivel superior de los componentes
