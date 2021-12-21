@@ -1,4 +1,6 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect, useReducer, useMemo, useRef, useCallback} from 'react';
+
+import { Search } from '../Search/Search';
 
 //Para un reducer necesitamos estados compuestos
 const initialState = {
@@ -30,12 +32,16 @@ const Characters = () => {
 
     const [favorites, dispatch] = useReducer(favoriteReducer, initialState);
 
+    const [search, setSearch] = useState('');
+
+    const searchInput = useRef(null);
+
     const handleClickOnAddFavorites = favorite =>{
         dispatch({
           type: 'ADD_TO_FAVORITE',
           payload: favorite
         })
-      };
+    };
     
      /*  const handleClickOnRemovefavorite = favorite => {
         dispatch({
@@ -43,6 +49,17 @@ const Characters = () => {
           payload: favorite,
         })
       } */
+
+    const handleSearch = useCallback(()=>{
+        setSearch(searchInput.current.value);
+    }, [])
+
+    const filteredCharacters = useMemo(()=>
+        characters.filter((user) => {
+            return user.name.toLowerCase().includes(search.toLowerCase());
+        }),
+        [characters,search]
+    )
 
     useEffect(() =>{
         fetch('https://rickandmortyapi.com/api/character')
@@ -61,9 +78,15 @@ const Characters = () => {
                     </li>
                 ))}
             </div>
+
+            <Search 
+                search={search}
+                searchInput={searchInput}
+                handleSearch={handleSearch}
+            />
             
             <div className=" flex flex-wrap -m-2">
-            {characters.length > 0 && characters.map(character => (
+            {characters.length > 0 && filteredCharacters.map(character => (
             <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={character.id}>
               <div className="h-full flex items-center border-gray-200 border-2 p-4 rounded-lg">
                 <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={character.image} />
