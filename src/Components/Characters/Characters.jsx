@@ -11,7 +11,10 @@ import { useCharacters } from '../Hooks/useCharacters';
 
 //Para un reducer necesitamos estados compuestos
 const initialState = {
+    darkmode: true,
+    characters: [],
     favorites: [],
+    search: '',
 };
 
 const API = 'https://rickandmortyapi.com/api/character'
@@ -27,12 +30,19 @@ const favoriteReducer = (state, action) => {
             };
 
         case 'REMOVE_FROM_FAVORITE':
+            const favoriteIndex = state.favorites.findIndex(
+                (favorite) => favorite.id === action.payload.id
+              );
+            const newFavorites = [...state.favorites];
+            newFavorites.splice(favoriteIndex, 1);
             return {
                 ...state,
-                favorites: [...state.favorites.filter(item=> item.id !== action.payload.id)]
+                favorites: newFavorites,
             }
         default:
-            return state;
+            return {
+                ...state,
+            };
     }
 };
 
@@ -53,12 +63,24 @@ const Characters = () => {
         })
     };
     
-     /*  const handleClickOnRemovefavorite = favorite => {
+     const handleClickOnRemoveFavorites = favorite => {
         dispatch({
-          type: 'REMOVE_FROM_FAVORITE',
-          payload: favorite,
+            type: 'REMOVE_FROM_FAVORITE',
+            payload: favorite,
         })
-      } */
+    }
+
+    const handleFavorites = (character) => {
+        const findFavorite = favorites.filter(
+            (favorite) => favorite.id === character.id
+        );
+      
+        if (!findFavorite.length)  {
+          dispatch(handleClickOnAddFavorites(character));
+        } else {
+          dispatch(handleClickOnRemoveFavorites(character));
+        }
+    };
 
     const handleSearch = useCallback(()=>{
         setSearch(searchInput.current.value);
