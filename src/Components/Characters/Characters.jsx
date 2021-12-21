@@ -1,5 +1,10 @@
 import React, {useState, useReducer, useMemo, useRef, useCallback} from 'react';
 
+import './Characters.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 import { Search } from '../Search/Search';
 
 import { useCharacters } from '../Hooks/useCharacters';
@@ -70,16 +75,26 @@ const Characters = () => {
         <div className="Characters px-5 mx-auto">
 
             {/* show favorites */}
-            <div className='flex flex-start mb-4'>
-                <h2 className='text-900 title-font font-medium'>Favorite Characters</h2>
-            </div>
-            <div className= 'flex flex-row flex-wrap mb-4'>
-                {favorites.favorites.map(favorite =>(
-                    <li className='list-none' key={favorite.id}>
-                        <img alt="team" className="w-16 h-16 border-gray-400 border-4 rounded-full mr-4 mt-4" src={favorite.image} />
-                    </li>
-                ))}
-            </div>
+            {favorites.favorites.length ? (
+                <>
+                    <div className='flex flex-start mb-4'>
+                        <h2 className='text-900 title-font font-medium'>Favorite Characters</h2>
+                    </div>
+                    <div className= 'flex flex-row flex-wrap mb-4'>
+                        {favorites.favorites.map(favorite =>(
+                            <li className='list-none' key={favorite.id}>
+                                <img 
+                                    alt="team" 
+                                    className="w-16 h-16 border-gray-400 border-4 rounded-full mr-4 mt-4" 
+                                    src={favorite.image} 
+                                    alt={favorite.name}
+                                    title={favorite.name}
+                                />
+                            </li>
+                        ))}
+                    </div>
+                </>
+            ) : null}
 
             <Search 
                 search={search}
@@ -87,6 +102,9 @@ const Characters = () => {
                 handleSearch={handleSearch}
             />
             
+            <div className='flex flex-start mb-4'>
+                <h2 className='text-900 title-font font-medium'>Characters</h2>
+            </div>
             <div className=" flex flex-wrap -m-2">
             {characters.length > 0 && filteredCharacters.map(character => (
             <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={character.id}>
@@ -100,7 +118,18 @@ const Characters = () => {
                 </div>
                 <button 
                 className="w-1/6 mx-auto border-2 p-2 rounded-xl"
-                type='button' onClick={() => handleClickOnAddFavorites(character)}>❤️</button>
+                type='button' onClick={() => handleClickOnAddFavorites(character)}>
+                    <FontAwesomeIcon
+                    className={`icon--favorite ${
+                      favorites.favorites.filter(
+                        (favorite) => favorite.id === character.id
+                      ).length
+                        ? 'favorite'
+                        : ''
+                    }`}
+                    icon={faStar}
+                  />
+                </button>
               </div>
             </div>
           ))}

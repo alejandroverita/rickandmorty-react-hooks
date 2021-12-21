@@ -1,0 +1,12 @@
+.icon--favorite {
+  transition: transform 0.3s;
+}
+
+.icon--favorite:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.favorite {
+  color: #ffc107;
+}
