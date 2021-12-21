@@ -13,3 +13,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 DarkMode view
 
 ![darkMode.png](https://static.platzi.com/media/user_upload/darkMode-bfb3fe75-d8d8-4667-bdf1-826975130d58.jpg)
+
+### useReducer
+
+Recibimos dos parámetros:
+
+- state: el estado de nuestro componente antes de realizar algún cambio.
+- action: un objeto con estos otros dos elementos.
+  – type el nombre del evento que cambiará nuestro estado.
+  – payload: es opcional, lo podemos utilizar para enviar información extra a la actualización de estado.
+
+En esta función vamos a definir todos los eventos de nuestro componente utilizando un switch.
+
+![ReducerwithFav](https://static.platzi.com/media/user_upload/useReducer-5d4d610f-55ac-4b92-88cf-3d5fc117dac1.jpg)

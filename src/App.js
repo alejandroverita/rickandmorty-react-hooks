@@ -5,8 +5,9 @@ import './App.css';
 import { Header } from './Components/Header/Header';
 import { Characters } from './Components/Characters/Characters';
 
-function App() {
 
+function App() {
+  
   const [darkMode, setDarkMode] = useState(false);
 
   const bg = darkMode ? 'bg-black text-white' : 'bg-white text-black';
@@ -21,7 +22,7 @@ function App() {
         darkMode={darkMode}
         onClick={handleClick}
       />
-      <Characters />
+      <Characters/>
     </div>
   );
 }
