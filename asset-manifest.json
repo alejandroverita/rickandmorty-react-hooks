@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/rickandmorty-react-hooks/static/css/main.4480fdc0.css",
+    "main.js": "/rickandmorty-react-hooks/static/js/main.3adfb3c7.js",
+    "static/js/787.725a6fad.chunk.js": "/rickandmorty-react-hooks/static/js/787.725a6fad.chunk.js",
+    "static/media/rick-and-morty-logo.png": "/rickandmorty-react-hooks/static/media/rick-and-morty-logo.df73b7db546a5a50f92d.png",
+    "index.html": "/rickandmorty-react-hooks/index.html",
+    "main.4480fdc0.css.map": "/rickandmorty-react-hooks/static/css/main.4480fdc0.css.map",
+    "main.3adfb3c7.js.map": "/rickandmorty-react-hooks/static/js/main.3adfb3c7.js.map",
+    "787.725a6fad.chunk.js.map": "/rickandmorty-react-hooks/static/js/787.725a6fad.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4480fdc0.css",
+    "static/js/main.3adfb3c7.js"
+  ]
+}
